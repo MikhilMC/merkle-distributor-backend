@@ -7,16 +7,20 @@ const mongoose = require("mongoose");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
-const createMerkleTreeRouter = require("./routes/merkle-tree/createMerkleTree");
+// const createMerkleTreeRouter = require("./routes/merkle-tree/createMerkleTree");
 const getMerkleProofRouter = require("./routes/merkle-tree/getMerkleProof");
 
-mongoose.connect("mongodb://127.0.0.1:27017/MerkleLeafDb", {}, (error) => {
-  if (error) {
-    console.log(err);
-  } else {
-    console.log("Connected to MongoDB.");
+mongoose.connect(
+  "mongodb+srv://merkle:KsxwuJ0TDD5MEXFb@cluster0.xhgbit9.mongodb.net/?retryWrites=true&w=majority",
+  {},
+  (error) => {
+    if (error) {
+      console.log(err);
+    } else {
+      console.log("Connected to MongoDB.");
+    }
   }
-});
+);
 
 var app = express();
 
@@ -28,7 +32,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-app.use("/create-merkle-tree", createMerkleTreeRouter);
+// app.use("/create-merkle-tree", createMerkleTreeRouter);
 app.use("/get-merkle-proof", getMerkleProofRouter);
 
 module.exports = app;

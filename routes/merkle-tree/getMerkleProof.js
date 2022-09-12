@@ -5,7 +5,6 @@ const keccak256 = require("keccak256");
 const { MerkleTree } = require("merkletreejs");
 
 const MerkleLeafData = require("../../model/MerkleLeafModel");
-const ACCOUNTS_DATA = require("./accountsData");
 
 const buf2Hex = (x) => "0x" + x.toString("hex");
 

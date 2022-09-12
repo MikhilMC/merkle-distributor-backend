@@ -26,14 +26,14 @@ createMerkleRouter.post("/", (req, res) => {
       [index, account, "50000000000000000000"]
     );
   });
-  console.log(leavesArray);
-  console.log(leaves);
+  // console.log(leavesArray);
+  // console.log(leaves);
   const tree = new MerkleTree(leaves, keccak256);
   const hexRoot = buf2Hex(tree.getRoot());
   leavesArray = leavesArray.map((leaf) => {
     return { ...leaf, hexRoot };
   });
-  console.log(leavesArray);
+  // console.log(leavesArray);
   MerkleLeafData.insertMany(leavesArray, (error, docs) => {
     if (error) {
       res.status(401).json({
