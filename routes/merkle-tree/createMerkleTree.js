@@ -31,7 +31,10 @@ createMerkleRouter.post("/", (req, res) => {
   const tree = new MerkleTree(leaves, keccak256);
   const hexRoot = buf2Hex(tree.getRoot());
   leavesArray = leavesArray.map((leaf) => {
-    return { ...leaf, hexRoot };
+    let hexProof = tree
+      .getProof(leaf.hexBuffer)
+      .map((item) => buf2Hex(item.data));
+    return { ...leaf, hexRoot, proof: hexProof };
   });
   // console.log(leavesArray);
   MerkleLeafData.insertMany(leavesArray, (error, docs) => {

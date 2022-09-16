@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
-// const createMerkleTreeRouter = require("./routes/merkle-tree/createMerkleTree");
+const createMerkleTreeRouter = require("./routes/merkle-tree/createMerkleTree");
 const getMerkleProofRouter = require("./routes/merkle-tree/getMerkleProof");
 
 mongoose.connect(
@@ -32,7 +32,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-// app.use("/create-merkle-tree", createMerkleTreeRouter);
+app.use("/create-merkle-tree", createMerkleTreeRouter);
 app.use("/get-merkle-proof", getMerkleProofRouter);
 
 module.exports = app;

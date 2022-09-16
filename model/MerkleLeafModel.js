@@ -7,6 +7,7 @@ const MerkleLeafSchema = new Schema({
   amount: { type: String },
   hexBuffer: { type: String },
   hexRoot: { type: String },
+  proof: { type: [String], default: [] },
 });
 
 module.exports = mongoose.model("merkleLeaf", MerkleLeafSchema, "merkleLeaf");
