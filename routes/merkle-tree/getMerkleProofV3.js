@@ -1,16 +1,11 @@
 const express = require("express");
 const getMerkleProofRouter = express.Router();
-const { utils } = require("ethers");
-const keccak256 = require("keccak256");
-const { MerkleTree } = require("merkletreejs");
 
-const MerkleLeafData = require("../../model/MerkleLeafModel");
-
-const buf2Hex = (x) => "0x" + x.toString("hex");
+const MerkleLeafData = require("../../model/MerkleLeafModelV3");
 
 getMerkleProofRouter.get("/", (req, res) => {
   MerkleLeafData.findOne(
-    { accountAddress: req.query.accountAddress },
+    { accountAddress: req.query.accountAddress, hexRoot: req.query.hexRoot },
     (error, merkleLeaf) => {
       if (error) {
         res.status(401).json({
@@ -35,6 +30,7 @@ getMerkleProofRouter.get("/", (req, res) => {
             index: merkleLeaf.index,
             accountAddress: req.query.accountAddress,
             amount: merkleLeaf.amount,
+            timestamp: merkleLeaf.timestamp,
             hexBuffer: merkleLeaf.hexBuffer,
             hexRoot: merkleLeaf.hexRoot,
             proof: merkleLeaf.proof,

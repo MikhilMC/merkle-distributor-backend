@@ -5,9 +5,14 @@ const MerkleLeafSchema = new Schema({
   index: { type: Number },
   accountAddress: { type: String },
   amount: { type: String },
+  timelock: { type: String },
   hexBuffer: { type: String },
   hexRoot: { type: String },
   proof: { type: [String], default: [] },
 });
 
-module.exports = mongoose.model("merkleLeaf", MerkleLeafSchema, "merkleLeaf");
+module.exports = mongoose.model(
+  "merkleLeafV2",
+  MerkleLeafSchema,
+  "merkleLeafV2"
+);
